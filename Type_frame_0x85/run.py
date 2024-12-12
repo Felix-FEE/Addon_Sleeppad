@@ -190,12 +190,12 @@ class class_Collect_Data_0x85():
     # heart_rate, respiration_rate, snoreData, pressureData, status_in_bed
     
     def push_data_0x85_HA(self, name_data, value_data, ip_local_OrangePi):
-        self.url_heart_rate = f'http://{ip_local_OrangePi}:8123/api/states/sensorSleeppad.{name_data}'
+        self.url_heart_rate = f'http://{ip_local_OrangePi}:8123/api/states/Sleeppad.{name_data}'
         if "heart" in name_data:
             unit = "bmp"
         elif "respi" in name_data:
             unit =  "breaths/min"
-        elif "snore":
+        elif "snore" in name_data:
             unit = "events"
         elif "press" in name_data:
             unit = "mmHg"
