@@ -202,7 +202,7 @@ class class_Collect_Data_0x85():
         
         
         headers = {
-            'Authorization': f'Felix {self.HA_TOKEN}',
+            'Authorization': f'Bearer {self.HA_TOKEN}',
             'Content-Type': 'application/json',
         }
         
