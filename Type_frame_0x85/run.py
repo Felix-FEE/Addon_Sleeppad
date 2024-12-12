@@ -221,7 +221,7 @@ class class_Collect_Data_0x85():
         else:
             print(f"Đã có lỗi: {response.status_code} - {response.text}")
     
-    def push_status_HA(self, ip_local_OrangePi, name_data, value_data):
+    def push_status_HA(self, name_data, value_data, ip_local_OrangePi):
         self.url_data = f'http://{ip_local_OrangePi}:8123/api/states/Sleeppad.{name_data}'
         headers = {
             'Authorization': f'Bearer {self.HA_TOKEN}',
