@@ -181,7 +181,7 @@ class class_Collect_Data_0x85():
                                self.ip_local)
         
         # status in bed
-        self.push_data_0x85_HA("status", 
+        self.push_status_HA("status", 
                                dict_data_Decimal_content['Status'],
                                self.ip_local)
         
@@ -190,7 +190,7 @@ class class_Collect_Data_0x85():
     # heart_rate, respiration_rate, snoreData, pressureData, status_in_bed
     
     def push_data_0x85_HA(self, name_data, value_data, ip_local_OrangePi):
-        self.url_heart_rate = f'http://{ip_local_OrangePi}:8123/api/states/Sleeppad.{name_data}'
+        self.url_data = f'http://{ip_local_OrangePi}:8123/api/states/Sleeppad.{name_data}'
         if "heart" in name_data:
             unit = "bmp"
         elif "respi" in name_data:
@@ -199,8 +199,6 @@ class class_Collect_Data_0x85():
             unit = "events"
         elif "press" in name_data:
             unit = "mmHg"
-        elif "status" in name_data:
-            unit = "events"
         
         
         headers = {
@@ -215,16 +213,33 @@ class class_Collect_Data_0x85():
                 'friendly_name': f'Sleeppad {name_data}',
             }
         }
-         
-        
-                
-        response = requests.post(self.url_heart_rate, headers=headers, json=payload)
+           
+        response = requests.post(self.url_data, headers=headers, json=payload)
         
         if response.status_code == 200:
             print("Dữ liệu đã được gửi lên Home Assistant.")
         else:
             print(f"Đã có lỗi: {response.status_code} - {response.text}")
+    
+    def push_status_HA(self, ip_local_OrangePi, name_data, value_data):
+        self.url_data = f'http://{ip_local_OrangePi}:8123/api/states/Sleeppad.{name_data}'
+        headers = {
+            'Authorization': f'Bearer {self.HA_TOKEN}',
+            'Content-Type': 'application/json',
+        }
+        payload = {
+            'state': value_data,
+            'attributes': {
+                'friendly_name': f'Sleeppad {name_data}',
+            }
+        }
         
+        response = requests.post(self.url_data, headers=headers, json=payload)
+        
+        if response.status_code == 200:
+            print("Dữ liệu đã được gửi lên Home Assistant.")
+        else:
+            print(f"Đã có lỗi: {response.status_code} - {response.text}")
 
     ############################################### Type frame 0x87 ##########################################################
     # def analyze_content_0x87(self, data_cnt):
