@@ -21,7 +21,7 @@ class class_Collect_Data_0x85():
                                    'Snore', 'Weak breathing']
         self.file_save_0x85 = 'data_0x85.csv'
         
-        self.HA_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJmOTc3ZDExMzA2NDY0MWE3YjhmZDk4ZDJjZWJjMGUyZiIsImlhdCI6MTczMzQ2NTM5MCwiZXhwIjoyMDQ4ODI1MzkwfQ.m0Mz5P3m5wlV5xLjVBS44GubCkJm19foIRlZlcRDbCc"
+        self.HA_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI4NDliYzAxMzE1ZjQ0NzZlYTZiOGNhZTFhMGU0NGVmMiIsImlhdCI6MTczMzk3NjEzOCwiZXhwIjoyMDQ5MzM2MTM4fQ.3ac6ZhEvdXbG2PblTW_MdVnHfOSXRdL2w3lQzGvKREw"
         self.ip_local = "192.168.239.242"
         
 #         self.data_status_define = ['Ra khỏi giường', 'Di chuyển trên giường', 'Ngồi dậy trên giường',
