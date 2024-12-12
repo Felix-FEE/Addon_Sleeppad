@@ -1,0 +1,12 @@
+{
+    "name": "Sleeppad_0x85 Addon",
+    "version": "1.0.0",
+    "slug": "Sleeppad_0x85_addon",
+    "description": "Add_on collect data Sleeppad 0x85",
+    "arch": ["amd64", "armv7", "aarch64"],
+    "startup": "application",
+    "boot": "auto",
+    "options": {},
+    "schema": {},
+    "host_network": false
+  }
