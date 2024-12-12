@@ -199,6 +199,8 @@ class class_Collect_Data_0x85():
             unit = "events"
         elif "press" in name_data:
             unit = "mmHg"
+        elif "status" in name_data:
+            unit = "events"
         
         
         headers = {
@@ -214,13 +216,7 @@ class class_Collect_Data_0x85():
             }
         }
          
-        if "status" in name_data:
-                payload = {
-                'state': value_data,
-                'attributes': {
-                    'friendly_name': f'Sleeppad {name_data}',
-                }
-            }
+        
                 
         response = requests.post(self.url_heart_rate, headers=headers, json=payload)
         
