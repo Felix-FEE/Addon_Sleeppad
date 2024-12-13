@@ -59,7 +59,7 @@ class class_Collect_Data_Sleeppad():
                     
                         self.state_init_uart = True
                     else:
-                        self.push_status_0x85_HA("Sleeppad", "Conencted", self.ip_local)
+                        
                         if self.uart4m0.in_waiting > 0:
                             data = self.uart4m0.read(self.uart4m0.in_waiting)
                             self.allDatahex_Recv = data.hex()
@@ -67,6 +67,7 @@ class class_Collect_Data_Sleeppad():
                                 
                             if (self.allDatahex_Recv[2:4] == '85'):
                                 #Mode 85
+                                self.push_status_0x85_HA("Sleeppad", "Conencted", self.ip_local)
                                 if self.check_invalid_sequence(self.allDatahex_Recv, self.max_length_85):
                                     self.result_data_struct = self.analyze_all_data(self.allDatahex_Recv)
                                     print("Data Hex Receive 0x85: ", self.allDatahex_Recv)
