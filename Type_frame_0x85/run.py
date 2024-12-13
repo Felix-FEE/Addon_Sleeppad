@@ -104,8 +104,8 @@ class class_Collect_Data_Sleeppad():
                                                 self.heart_final = min(self.list_heart_current, key=lambda y: abs(y - self.heart_final))
                                                 self.list_heart_save = self.list_heart_current
                                             else:
-                                                self.heart_final = 0
-                                                self.list_heart_save = []
+                                                self.heart_final = self.process_miss_point_data(self.list_heart_save)
+                                                
                                                 
                                         #first
                                         if self.list_respiration_save == []:
@@ -121,8 +121,10 @@ class class_Collect_Data_Sleeppad():
                                                 self.respi_final = min(self.list_respiration_current, key=lambda y: abs(y - self.respi_final))
                                                 self.list_respiration_save = self.list_respiration_current
                                             else:
-                                                self.respi_final = 0
-                                                self.list_respiration_save = []
+                                                # Nội suy 
+                                                
+                                                self.respi_final = self.process_miss_point_data(self.list_respiration_save)
+                                                
                                                 
                                         print("-------------------Final heart: ", self.heart_final)
                                         print("-------------------Final respi: ", self.respi_final)
@@ -136,17 +138,20 @@ class class_Collect_Data_Sleeppad():
                                                                 self.ip_local)
                                         self.list_heart_current = []
                                         self.list_respiration_current = []
-                                    self.push_status_0x85_HA("status", 
-                                            self.dict_data_decimal_content['Status'],
-                                            self.ip_local)
+                                        self.push_status_0x85_HA("status", 
+                                                self.dict_data_decimal_content['Status'],
+                                                self.ip_local)
+                                
                             else:
                                 print(f"Type frame: {self.allDatahex_Recv[2:4]}")
                                 self.push_status_0x85_HA("Sleeppad", "The system is booting.", self.ip_local)
-                        
+                        else:
+                            self.push_status_0x85_HA("Sleeppad", "The system is booting.", self.ip_local)
                         # Analyze all data hex from Sleeppad at mode 0x85:
                 else:
                     print("UART4-M0 failed")
-                    
+                    print(f"Type frame: {self.allDatahex_Recv[2:4]}")
+                    self.push_status_0x85_HA("Sleeppad", "Not Connect", self.ip_local)
                     self.state_init_uart = False
                 time.sleep(1)
             except Exception as e:
@@ -155,6 +160,15 @@ class class_Collect_Data_Sleeppad():
                 self.state_init_uart = False
                 pass
     
+    def process_miss_point_data(self, list_save):
+        l_lssave = len(list_save)
+        if l_lssave == 1:
+            point_final = list_save[0]/2
+        elif l_lssave >= 2:
+            point_final = sum(list_save)/l_lssave
+        return int(point_final)
+            
+            
     def check_invalid_sequence(self, data, max_length):
         # Tìm vị trí xuất hiện của "0d7d"
         pos = data.find("0d7d")
