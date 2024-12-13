@@ -79,7 +79,7 @@ class class_Collect_Data_Sleeppad():
                     print("UART4-M0 failed")
                     
                     self.state_init_uart = False
-                time.sleep(1)
+                time.sleep(0.5)
             except Exception as e:
                 print(e)
                 self.push_status_0x85_HA("Sleeppad", "Not Connect", self.ip_local)
@@ -210,10 +210,6 @@ class class_Collect_Data_Sleeppad():
            
         response = requests.post(self.url_data, headers=headers, json=payload)
         
-        if response.status_code == 200:
-            print("Dữ liệu đã được gửi lên Home Assistant.")
-        else:
-            print(f"Đã có lỗi: {response.status_code} - {response.text}")
     
     def push_status_0x85_HA(self, name_data, value_data, ip_local_OrangePi):
         self.url_data = f'http://{ip_local_OrangePi}:8123/api/states/Sleeppad.{name_data}'
@@ -230,10 +226,6 @@ class class_Collect_Data_Sleeppad():
         
         response = requests.post(self.url_data, headers=headers, json=payload)
         
-        if response.status_code == 200:
-            print("Dữ liệu đã được gửi lên Home Assistant.")
-        else:
-            print(f"Đã có lỗi: {response.status_code} - {response.text}")
             
             
     def save_data_to_csv_top(self, dict_data_Decimal_content, file_path):
@@ -266,9 +258,8 @@ class class_Collect_Data_Sleeppad():
             with open(file_path, "w", newline="") as file:
                 writer = csv.writer(file)
                 writer.writerows(data)
-            print("Save successfull")
-        else:
-            print("Save failed")
+
+
         
 
     def convert_hex_decimal_apair(self, data_hex): # ID_total
