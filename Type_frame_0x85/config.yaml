@@ -1,7 +1,7 @@
 name: "sleeppad_0x85"
 version: "1.0.0"
 slug: "sleeppad_0x85"
-description: "Addon to read sht31 sensor data and post to Home Assistant"
+description: "Addon to read Sleeppad sensor data and post to Home Assistant"
 arch:
   - armhf
   - armv7
