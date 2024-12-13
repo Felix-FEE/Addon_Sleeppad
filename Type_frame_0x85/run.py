@@ -110,6 +110,7 @@ class class_Collect_Data_Sleeppad():
                                         #first
                                         if self.list_respiration_save == []:
                                             if self.list_respiration_current != []:
+                                                self.list_respiration_save = self.list_respiration_current
                                                 self.respi_final =  max(self.list_respiration_save)
                                             else:
                                                 self.respi_final = 0
