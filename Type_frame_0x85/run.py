@@ -138,6 +138,9 @@ class class_Collect_Data_Sleeppad():
                                     
                             else:
                                 print(f"Type frame: {self.allDatahex_Recv[2:4]}")
+                        
+                        else:
+                            self.push_status_0x85_HA("Sleeppad", "The system is booting.", self.ip_local)
 
                         # Analyze all data hex from Sleeppad at mode 0x85:
                 else:
