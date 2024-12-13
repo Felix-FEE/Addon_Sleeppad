@@ -84,11 +84,11 @@ class class_Collect_Data_Sleeppad():
                                         self.list_heart_current.append(int(self.dict_data_decimal_content['Heart_rate']))
                                     if (self.dict_data_decimal_content['Respiraton_rate'] != 0):
                                         self.list_respiration_current.append(float(self.dict_data_decimal_content['Respiraton_rate']))
-                                    #  1push/60s        
-                                    if self.count1 == 59:
+                                    #  1push/60s  120s      
+                                    if self.count1 == 119:
                                         self.count1 = 0
                                         
-                                        if self.list_heart_save == []:
+                                        if self.list_heart_save == []: # First
                                             if self.list_heart_current != []:
                                                 self.list_heart_save = self.list_heart_current
                                                 self.heart_final = max(self.list_heart_save)
@@ -126,20 +126,15 @@ class class_Collect_Data_Sleeppad():
                                         self.push_data_0x85_HA("respiration_rate",
                                                                 self.respi_final,
                                                                 self.ip_local)
-                                        
-                                        self.push_status_0x85_HA("status", 
-                                            self.dict_data_decimal_content['Status'],
-                                            self.ip_local)
                                         self.list_heart_current = []
                                         self.list_respiration_current = []
-               
-                                    
+                                    self.push_status_0x85_HA("status", 
+                                            self.dict_data_decimal_content['Status'],
+                                            self.ip_local)
                             else:
                                 print(f"Type frame: {self.allDatahex_Recv[2:4]}")
                                 self.push_status_0x85_HA("Sleeppad", "The system is booting.", self.ip_local)
                         
-                        
-
                         # Analyze all data hex from Sleeppad at mode 0x85:
                 else:
                     print("UART4-M0 failed")
