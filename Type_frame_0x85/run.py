@@ -27,7 +27,7 @@ class class_Collect_Data_Sleeppad():
 
         
         self.HA_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI4NDliYzAxMzE1ZjQ0NzZlYTZiOGNhZTFhMGU0NGVmMiIsImlhdCI6MTczMzk3NjEzOCwiZXhwIjoyMDQ5MzM2MTM4fQ.3ac6ZhEvdXbG2PblTW_MdVnHfOSXRdL2w3lQzGvKREw"
-        self.ip_local = "192.168.1.15"
+        self.ip_local = "192.168.239.242"
         
         # Length data recv to filter
         self.max_length_85 = 54
