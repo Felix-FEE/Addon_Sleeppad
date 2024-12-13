@@ -32,6 +32,12 @@ class class_Collect_Data_Sleeppad():
         # Length data recv to filter
         self.max_length_85 = 54
     
+        self.list_heart_current = []
+        self.list_heart_save = []
+        self.list_respiration_current = []
+        self.list_respiration_save = []
+        self.count1 = 0
+        
     def check_port_uart(self):
    
         have_uart4m0 = False
@@ -69,7 +75,66 @@ class class_Collect_Data_Sleeppad():
                                     print("Dict all data Hex 0x85: ", self.result_data_struct)
                                     # Analyz_Conet_0x85
                                     self.dict_data_hex_content, self.dict_data_decimal_content = self.analyze_content_0x85(self.result_data_struct['Content/Response'])
+                                    self.count1 += 1
+                                    print('Count: ', self.count1)
+                                    print("List heart save: ", self.list_heart_save)
+                                    print("List heart current: ", self.list_heart_current)
+                                    print("List respi save: ", self.list_respiration_save)
+                                    print("List respi current: ", self.list_respiration_current)
                                     
+                                    if (self.dict_data_decimal_content['Heart_rate'] != 0):
+                                        self.list_heart_current.append(int(self.dict_data_decimal_content['Heart_rate']))
+                                    if (self.dict_data_decimal_content['Respiraton_rate'] != 0):
+                                        self.list_respiration_current.append(float(self.dict_data_decimal_content['Respiraton_rate']))
+                                    #  1push/60s        
+                                    if self.count1 == 59:
+                                        self.count1 = 0
+                                        
+                                        if self.list_heart_save == []:
+                                            if self.list_heart_current != []:
+                                                self.list_heart_save = self.list_heart_current
+                                                self.heart_final = max(self.list_heart_save)
+                                                
+                                                self.list_respiration_save = self.list_respiration_current
+                                                self.respi_final =  max(self.list_respiration_save)
+                                                
+                                            else:
+                                                self.heart_final = 0
+                                                self.respi_final = 0
+                                                
+                                            print("------------------Final heart first: ", self.heart_final)
+                                            print("------------------Final respi first: ", self.respi_final)
+                                        else:
+                                            if self.list_heart_current != []:
+                                                self.heart_final = min(self.list_heart_current, key=lambda y: abs(y - self.heart_final))
+                                                
+                                                self.list_heart_save = self.list_heart_current
+                                            else:
+                                                self.heart_final = 0
+                                                
+                                            if self.list_respiration_current != []:
+                                                self.respi_final = min(self.list_respiration_current, key=lambda y: abs(y - self.respi_final))
+                                                self.list_respiration_save = self.list_respiration_current
+                                            else:
+                                                self.respi_final = 0
+                                                
+                                            print("-------------------Final heart: ", self.heart_final)
+                                            print("-------------------Final respi: ", self.respi_final)
+                                        self.push_data_0x85_HA("heart_rate", 
+                                                                self.heart_final,
+                                                                self.ip_local)
+
+                                        # Respiration rate
+                                        self.push_data_0x85_HA("respiration_rate",
+                                                                self.respi_final,
+                                                                self.ip_local)
+                                        
+                                        self.push_status_0x85_HA("status", 
+                                            self.dict_data_decimal_content['Status'],
+                                            self.ip_local)
+                                        self.list_heart_current = []
+                                        self.list_respiration_current = []
+               
                                     
                             else:
                                 print(f"Type frame: {self.allDatahex_Recv[2:4]}")
@@ -167,7 +232,6 @@ class class_Collect_Data_Sleeppad():
         
         ########################### PUSH data on HA ###################################
         
-        self.push_all_data_0x85_HA(dict_data_Decimal_content)
         
         return dict_data_Hex_content, dict_data_Decimal_content
     
