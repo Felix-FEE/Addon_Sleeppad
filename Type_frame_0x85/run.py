@@ -60,9 +60,7 @@ class class_Collect_Data_Sleeppad():
                         self.state_init_uart = True
                     else:
                         self.push_status_0x85_HA("Sleeppad", "Conencted", self.ip_local)
-                        print("Collect")
                         if self.uart4m0.in_waiting > 0:
-                            print("Collect2")
                             data = self.uart4m0.read(self.uart4m0.in_waiting)
                             self.allDatahex_Recv = data.hex()
                             print(self.allDatahex_Recv)
@@ -138,9 +136,9 @@ class class_Collect_Data_Sleeppad():
                                     
                             else:
                                 print(f"Type frame: {self.allDatahex_Recv[2:4]}")
+                                self.push_status_0x85_HA("Sleeppad", "The system is booting.", self.ip_local)
                         
-                        else:
-                            self.push_status_0x85_HA("Sleeppad", "The system is booting.", self.ip_local)
+                        
 
                         # Analyze all data hex from Sleeppad at mode 0x85:
                 else:
