@@ -92,16 +92,13 @@ class class_Collect_Data_Sleeppad():
                                             if self.list_heart_current != []:
                                                 self.list_heart_save = self.list_heart_current
                                                 self.heart_final = max(self.list_heart_save)
-                                                
-                                                self.list_respiration_save = self.list_respiration_current
-                                                self.respi_final =  max(self.list_respiration_save)
-                                                
+      
                                             else:
                                                 self.heart_final = 0
-                                                self.respi_final = 0
+                                                
                                                 
                                             print("------------------Final heart first: ", self.heart_final)
-                                            print("------------------Final respi first: ", self.respi_final)
+                                            
                                         else:
                                             if self.list_heart_current != []:
                                                 self.heart_final = min(self.list_heart_current, key=lambda y: abs(y - self.heart_final))
@@ -110,6 +107,15 @@ class class_Collect_Data_Sleeppad():
                                                 self.heart_final = 0
                                                 self.list_heart_save = []
                                                 
+                                        #first
+                                        if self.list_respiration_save == []:
+                                            if self.list_respiration_current != []:
+                                                self.respi_final =  max(self.list_respiration_save)
+                                            else:
+                                                self.respi_final = 0
+                                            print("------------------Final respi first: ", self.respi_final)    
+                                            
+                                        else:  
                                             if self.list_respiration_current != []:
                                                 self.respi_final = min(self.list_respiration_current, key=lambda y: abs(y - self.respi_final))
                                                 self.list_respiration_save = self.list_respiration_current
@@ -117,12 +123,12 @@ class class_Collect_Data_Sleeppad():
                                                 self.respi_final = 0
                                                 self.list_respiration_save = []
                                                 
-                                            print("-------------------Final heart: ", self.heart_final)
-                                            print("-------------------Final respi: ", self.respi_final)
+                                        print("-------------------Final heart: ", self.heart_final)
+                                        print("-------------------Final respi: ", self.respi_final)
+                                            
                                         self.push_data_0x85_HA("heart_rate", 
                                                                 self.heart_final,
                                                                 self.ip_local)
-
                                         # Respiration rate
                                         self.push_data_0x85_HA("respiration_rate",
                                                                 self.respi_final,
