@@ -79,7 +79,7 @@ class class_Collect_Data_Sleeppad():
                     print("UART4-M0 failed")
                     
                     self.state_init_uart = False
-                time.sleep(0.5)
+                time.sleep(1)
             except Exception as e:
                 print(e)
                 self.push_status_0x85_HA("Sleeppad", "Not Connect", self.ip_local)
