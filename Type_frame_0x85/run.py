@@ -154,12 +154,13 @@ class class_Collect_Data_Sleeppad():
                     print(f"Type frame: {self.allDatahex_Recv[2:4]}")
                     self.push_status_0x85_HA("Sleeppad", "Not Connect", self.ip_local)
                     self.state_init_uart = False
-                time.sleep(1)
+                
             except Exception as e:
                 print(e)
                 self.push_status_0x85_HA("Sleeppad", "Not Connect", self.ip_local)
                 self.state_init_uart = False
                 pass
+            time.sleep(1)
     
     def process_miss_point_data(self, list_save):
         l_lssave = len(list_save)
