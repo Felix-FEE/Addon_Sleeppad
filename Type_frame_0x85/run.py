@@ -105,16 +105,17 @@ class class_Collect_Data_Sleeppad():
                                         else:
                                             if self.list_heart_current != []:
                                                 self.heart_final = min(self.list_heart_current, key=lambda y: abs(y - self.heart_final))
-                                                
                                                 self.list_heart_save = self.list_heart_current
                                             else:
                                                 self.heart_final = 0
+                                                self.list_heart_save = []
                                                 
                                             if self.list_respiration_current != []:
                                                 self.respi_final = min(self.list_respiration_current, key=lambda y: abs(y - self.respi_final))
                                                 self.list_respiration_save = self.list_respiration_current
                                             else:
                                                 self.respi_final = 0
+                                                self.list_respiration_save = []
                                                 
                                             print("-------------------Final heart: ", self.heart_final)
                                             print("-------------------Final respi: ", self.respi_final)
