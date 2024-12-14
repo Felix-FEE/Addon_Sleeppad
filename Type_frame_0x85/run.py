@@ -162,14 +162,18 @@ class class_Collect_Data_Sleeppad():
                 pass
             time.sleep(1)
     
-    def process_miss_point_data(self, list_save):
-        l_lssave = len(list_save)
-        if l_lssave == 1:
-            point_final = list_save[0]/2
-        elif l_lssave >= 2:
-            point_final = sum(list_save)/l_lssave
-        list_save.append(int(point_final))
-        return int(point_final)
+    def process_miss_point_data(self, list_save, status_now):
+        if status_now == self.data_status_define[0] :
+            return 0
+        else:
+            l_lssave = len(list_save)
+            if l_lssave == 1:
+                point_final = list_save[0]/2
+            elif l_lssave >= 2:
+                point_final = sum(list_save)/l_lssave
+            list_save = []
+            list_save.append(int(point_final))
+            return int(point_final)
             
             
     def check_invalid_sequence(self, data, max_length):
