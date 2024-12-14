@@ -288,8 +288,8 @@ class class_Collect_Data_Sleeppad():
         payload = {
             'state': value_data,
             'attributes': {
-                'unit_of_measurement': f'{unit}',
-                'friendly_name': 'Sleeppad',
+                
+                'friendly_name': f'{name_data} ({unit})',
             }
         }
            
@@ -305,7 +305,7 @@ class class_Collect_Data_Sleeppad():
         payload = {
             'state': value_data,
             'attributes': {
-                'friendly_name': 'Sleeppad',
+                'friendly_name': 'Status',
             }
         }
         
