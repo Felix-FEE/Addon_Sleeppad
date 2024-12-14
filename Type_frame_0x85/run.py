@@ -168,6 +168,7 @@ class class_Collect_Data_Sleeppad():
             point_final = list_save[0]/2
         elif l_lssave >= 2:
             point_final = sum(list_save)/l_lssave
+        list_save.append(int(point_final))
         return int(point_final)
             
             
@@ -288,7 +289,7 @@ class class_Collect_Data_Sleeppad():
             'state': value_data,
             'attributes': {
                 'unit_of_measurement': f'{unit}',
-                'friendly_name': f'Sleeppad {name_data}',
+                'friendly_name': 'Sleeppad',
             }
         }
            
@@ -304,7 +305,7 @@ class class_Collect_Data_Sleeppad():
         payload = {
             'state': value_data,
             'attributes': {
-                'friendly_name': f'Sleeppad {name_data}',
+                'friendly_name': 'Sleeppad',
             }
         }
         
