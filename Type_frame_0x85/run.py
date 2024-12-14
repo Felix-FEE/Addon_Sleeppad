@@ -273,7 +273,7 @@ class class_Collect_Data_Sleeppad():
                                self.ip_local)
     
     def push_data_0x85_HA(self, name_data, value_data, ip_local_OrangePi):
-        self.url_data = f'http://{ip_local_OrangePi}:8123/api/states/Sleeppad.{name_data}'
+        self.url_data = f'http://{ip_local_OrangePi}:8123/api/states/sleeppad.{name_data}'
         if "heart" in name_data:
             unit = "bmp"
         elif "respi" in name_data:
@@ -296,7 +296,7 @@ class class_Collect_Data_Sleeppad():
         
     
     def push_status_0x85_HA(self, name_data, value_data, ip_local_OrangePi):
-        self.url_data = f'http://{ip_local_OrangePi}:8123/api/states/Sleeppad.{name_data}'
+        self.url_data = f'http://{ip_local_OrangePi}:8123/api/states/sleeppad.{name_data}'
         headers = {
             'Authorization': f'Bearer {self.HA_TOKEN}',
             'Content-Type': 'application/json',
