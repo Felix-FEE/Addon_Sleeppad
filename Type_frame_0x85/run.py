@@ -37,6 +37,7 @@ class class_Collect_Data_Sleeppad():
         self.list_respiration_current = []
         self.list_respiration_save = []
         self.list_status_current = [] # Save status -> status final
+        self.list_status_save = []
         self.count1 = 0
         
     def check_port_uart(self):
@@ -96,26 +97,33 @@ class class_Collect_Data_Sleeppad():
                                             if self.list_heart_current != []:
                                                 self.list_heart_save = self.list_heart_current
                                                 self.heart_final = max(self.list_heart_save)
+                                                index_heart_final = self.list_heart_current.index(self.heart_final)
+                                                self.status_final = self.dict_data_decimal_content['Status'][index_heart_final]
       
                                             else:
                                                 self.heart_final = 0
+                                                self.status_final = self.data_status_define[0]
                                                 
                                                 
                                             print("------------------Final heart first: ", self.heart_final)
+                                            print("------------------Final status first: ", self.status)
                                             
                                         else:
                                             if self.list_heart_current != []:
                                                 self.heart_final = min(self.list_heart_current, key=lambda y: abs(y - self.heart_final))
                                                 self.list_heart_save = self.list_heart_current
+                                                index_heart_final = self.list_heart_current.index(self.heart_final)
+                                                self.status_final = self.dict_data_decimal_content['Status'][index_heart_final]
                                             else:
                                                 self.heart_final = self.process_miss_point_data(self.list_heart_save)
-                                                
+                                                # Status không thay đổi nếu miss
                                                 
                                         #first
                                         if self.list_respiration_save == []:
                                             if self.list_respiration_current != []:
                                                 self.list_respiration_save = self.list_respiration_current
                                                 self.respi_final =  max(self.list_respiration_save)
+                                                
                                             else:
                                                 self.respi_final = 0
                                             print("------------------Final respi first: ", self.respi_final)    
@@ -124,6 +132,7 @@ class class_Collect_Data_Sleeppad():
                                             if self.list_respiration_current != []:
                                                 self.respi_final = min(self.list_respiration_current, key=lambda y: abs(y - self.respi_final))
                                                 self.list_respiration_save = self.list_respiration_current
+                                                
                                             else:
                                                 # Nội suy 
                                                 
@@ -131,7 +140,7 @@ class class_Collect_Data_Sleeppad():
                                                 
                                                 
                                         
-                                        index_heart_final = self.list_respiration_current.index(self.heart_final)
+                                        
                                         self.push_data_0x85_HA("heart_rate", 
                                                                 self.heart_final,
                                                                 self.ip_local)
@@ -139,9 +148,9 @@ class class_Collect_Data_Sleeppad():
                                         self.push_data_0x85_HA("respiration_rate",
                                                                 self.respi_final,
                                                                 self.ip_local)
-                                        self.status_final = self.dict_data_decimal_content['Status'][index_heart_final]
+                                        
                                         self.push_status_0x85_HA("status", 
-                                            self.dict_data_decimal_content['Status'],
+                                            self.status_final,
                                             self.ip_local)
                                         print("-------------------Final heart: ", self.heart_final)
                                         print("-------------------Final respi: ", self.respi_final)
