@@ -98,7 +98,7 @@ class class_Collect_Data_Sleeppad():
                                                 self.list_heart_save = self.list_heart_current
                                                 self.heart_final = max(self.list_heart_save)
                                                 index_heart_final = self.list_heart_current.index(self.heart_final)
-                                                self.status_final = self.dict_data_decimal_content['Status'][index_heart_final]
+                                                self.status_final = self.list_status_current[index_heart_final]
       
                                             else:
                                                 self.heart_final = 0
@@ -113,7 +113,7 @@ class class_Collect_Data_Sleeppad():
                                                 self.heart_final = min(self.list_heart_current, key=lambda y: abs(y - self.heart_final))
                                                 self.list_heart_save = self.list_heart_current
                                                 index_heart_final = self.list_heart_current.index(self.heart_final)
-                                                self.status_final = self.dict_data_decimal_content['Status'][index_heart_final]
+                                                self.status_final = self.list_status_current[index_heart_final]
                                             else:
                                                 self.heart_final = self.process_miss_point_data(self.list_heart_save)
                                                 # Status không thay đổi nếu miss
@@ -138,8 +138,6 @@ class class_Collect_Data_Sleeppad():
                                                 
                                                 self.respi_final = self.process_miss_point_data(self.list_respiration_save)
                                                 
-                                                
-                                        
                                         
                                         self.push_data_0x85_HA("heart_rate", 
                                                                 self.heart_final,
