@@ -116,10 +116,14 @@ class class_Collect_Data_Sleeppad():
                                                 index_heart_final = self.list_heart_current.index(self.heart_final)
                                                 self.status_final = self.list_status_current[index_heart_final]
                                             else:
-                                                self.heart_final, self.list_heart_save = self.process_miss_point_data(self.list_heart_save)
+                                                
                                                 # Status nếu miss
                                                 if self.check_list_status(self.data_status_define[0], self.list_all_status_current):
                                                     self.status_final = self.dict_data_decimal_content['Status']
+                                                    self.heart_final = 0
+                                                    self.list_heart_save = []
+                                                else:
+                                                    self.heart_final, self.list_heart_save = self.process_miss_point_data(self.list_heart_save)
                                                     
                                         #first
                                         if self.list_respiration_save == []:
@@ -137,7 +141,13 @@ class class_Collect_Data_Sleeppad():
                                                 self.list_respiration_save = self.list_respiration_current
                                                 
                                             else:
-                                                self.respi_final, self.list_respiration_save = self.process_miss_point_data(self.list_respiration_save)
+                                                
+                                                if self.check_list_status(self.data_status_define[0], self.list_all_status_current):
+                                                    self.status_final = self.dict_data_decimal_content['Status']
+                                                    self.respi_final = 0
+                                                    self.list_respi_save = []
+                                                else:                                                    
+                                                    self.respi_final, self.list_respiration_save = self.process_miss_point_data(self.list_respiration_save)
                                                 
                                         
                                         self.push_data_0x85_HA("heart_rate", 
