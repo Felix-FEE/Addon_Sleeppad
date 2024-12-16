@@ -90,7 +90,7 @@ class class_Collect_Data_Sleeppad():
                                         self.list_respiration_current.append(float(self.dict_data_decimal_content['Respiraton_rate']))
                                     
                                     #  1push/60s  120s      
-                                    if self.count1 == 119:
+                                    if self.count1 == 59:
                                         self.count1 = 0
                                         
                                         if self.list_heart_save == []: # First
