@@ -115,7 +115,7 @@ class class_Collect_Data_Sleeppad():
                                                 index_heart_final = self.list_heart_current.index(self.heart_final)
                                                 self.status_final = self.list_status_current[index_heart_final]
                                             else:
-                                                self.heart_final = self.process_miss_point_data(self.list_heart_save)
+                                                self.heart_final, self.list_heart_save = self.process_miss_point_data(self.list_heart_save)
                                                 # Status không thay đổi nếu miss
                                                 
                                         #first
@@ -136,7 +136,7 @@ class class_Collect_Data_Sleeppad():
                                             else:
                                                 # Nội suy 
                                                 
-                                                self.respi_final = self.process_miss_point_data(self.list_respiration_save)
+                                                self.respi_final, self.list_respiration_save = self.process_miss_point_data(self.list_respiration_save)
                                                 
                                         
                                         self.push_data_0x85_HA("heart_rate", 
@@ -186,7 +186,7 @@ class class_Collect_Data_Sleeppad():
             point_final = sum(list_save)/l_lssave
         list_save = []
         list_save.append(int(point_final))
-        return int(point_final)
+        return int(point_final), list_save
             
             
     def check_invalid_sequence(self, data, max_length):
