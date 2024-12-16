@@ -57,7 +57,7 @@ class class_Collect_Data_Sleeppad():
                     print("UART4-M0 ready!!")
                     
                     if self.state_init_uart == False:
-                        self.uart4m0 = serial.Serial(self.port_uart, 115200, timeout=1, stopbits=1)
+                        self.uart4m0 = serial.Serial(self.port_uart, 115200, timeout=0, stopbits=1)
                     
                         self.state_init_uart = True
                     else:
