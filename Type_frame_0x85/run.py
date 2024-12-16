@@ -37,7 +37,7 @@ class class_Collect_Data_Sleeppad():
         self.list_respiration_current = []
         self.list_respiration_save = []
         self.list_status_current = [] # Save status -> status final
-        self.list_status_save = []
+        self.list_all_status_current = []
         self.count1 = 0
         
     def check_port_uart(self):
@@ -88,7 +88,7 @@ class class_Collect_Data_Sleeppad():
                                         self.list_status_current.append(self.dict_data_decimal_content['Status'])
                                     if (self.dict_data_decimal_content['Respiraton_rate'] != 0):
                                         self.list_respiration_current.append(float(self.dict_data_decimal_content['Respiraton_rate']))
-                                    
+                                    self.list_all_status_current.append(self.dict_data_decimal_content['Status'])
                                     #  1push/60s  120s      
                                     if self.count1 == 59:
                                         self.count1 = 0
@@ -116,8 +116,9 @@ class class_Collect_Data_Sleeppad():
                                                 self.status_final = self.list_status_current[index_heart_final]
                                             else:
                                                 self.heart_final, self.list_heart_save = self.process_miss_point_data(self.list_heart_save)
-                                                # Status không thay đổi nếu miss
-                                                self.status_final = self.dict_data_decimal_content['Status']
+                                                # Status nếu miss
+                                                if self.check_list_status(self.data_status_define[0], self.list_all_status_current):
+                                                    self.status_final = self.dict_data_decimal_content['Status']
                                         #first
                                         if self.list_respiration_save == []:
                                             if self.list_respiration_current != []:
@@ -134,8 +135,6 @@ class class_Collect_Data_Sleeppad():
                                                 self.list_respiration_save = self.list_respiration_current
                                                 
                                             else:
-                                                # Nội suy 
-                                                
                                                 self.respi_final, self.list_respiration_save = self.process_miss_point_data(self.list_respiration_save)
                                                 
                                         
@@ -176,6 +175,9 @@ class class_Collect_Data_Sleeppad():
                 self.state_init_uart = False
                 pass
             time.sleep(1)
+            
+    def check_list_status(self,value_check, list_check):
+        return all(item == value_check for item in list_check) 
     
     def process_miss_point_data(self, list_save):
         
