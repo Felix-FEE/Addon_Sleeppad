@@ -145,7 +145,7 @@ class class_Collect_Data_Sleeppad():
                                                 if self.check_list_status(self.data_status_define[0], self.list_all_status_current):
                                                     self.status_final = self.dict_data_decimal_content['Status']
                                                     self.respi_final = 0
-                                                    self.list_respi_save = []
+                                                    self.list_respiration_save = []
                                                 else:                                                    
                                                     self.respi_final, self.list_respiration_save = self.process_miss_point_data(self.list_respiration_save)
                                                 
