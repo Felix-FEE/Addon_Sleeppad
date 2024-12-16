@@ -83,6 +83,7 @@ class class_Collect_Data_Sleeppad():
                                     print("List respi save: ", self.list_respiration_save)
                                     print("List respi current: ", self.list_respiration_current)
                                     print("List status current: ", self.list_status_current)
+                                    print("List all status current: ", self.list_all_status_current)
                                     if (self.dict_data_decimal_content['Heart_rate'] != 0):
                                         self.list_heart_current.append(int(self.dict_data_decimal_content['Heart_rate']))
                                         self.list_status_current.append(self.dict_data_decimal_content['Status'])
