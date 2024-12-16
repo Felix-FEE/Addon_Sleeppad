@@ -148,6 +148,7 @@ class class_Collect_Data_Sleeppad():
                                         print("-------------------Final status: ", self.status_final)
                                         self.list_heart_current = []
                                         self.list_respiration_current = []
+                                        self.list_status_current = []
                                     
                                 
                             else:
