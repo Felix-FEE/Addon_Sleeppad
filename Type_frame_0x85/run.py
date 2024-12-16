@@ -106,7 +106,7 @@ class class_Collect_Data_Sleeppad():
                                                 
                                                 
                                             print("------------------Final heart first: ", self.heart_final)
-                                            print("------------------Final status first: ", self.status)
+                                            print("------------------Final status first: ", self.status_final)
                                             
                                         else:
                                             if self.list_heart_current != []:
