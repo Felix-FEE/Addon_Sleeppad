@@ -120,7 +120,7 @@ class class_Collect_Data_Sleeppad():
                                                 # Status nếu miss
                                                 if self.check_list_status(self.data_status_define[0], self.list_all_status_current):
                                                     self.status_final = self.dict_data_decimal_content['Status']
-                                                    self.list_all_status_current = []
+                                                    
                                         #first
                                         if self.list_respiration_save == []:
                                             if self.list_respiration_current != []:
@@ -157,6 +157,7 @@ class class_Collect_Data_Sleeppad():
                                         self.list_heart_current = []
                                         self.list_respiration_current = []
                                         self.list_status_current = []
+                                        self.list_all_status_current = []
                                     
                                 
                             else:
