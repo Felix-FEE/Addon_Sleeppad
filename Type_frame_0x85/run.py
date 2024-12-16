@@ -117,7 +117,7 @@ class class_Collect_Data_Sleeppad():
                                             else:
                                                 self.heart_final, self.list_heart_save = self.process_miss_point_data(self.list_heart_save)
                                                 # Status không thay đổi nếu miss
-                                                
+                                                self.status_final = self.dict_data_decimal_content['Status']
                                         #first
                                         if self.list_respiration_save == []:
                                             if self.list_respiration_current != []:
