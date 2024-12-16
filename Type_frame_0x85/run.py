@@ -56,7 +56,7 @@ class class_Collect_Data_Sleeppad():
                     
                     if self.state_init_uart == False:
                         self.uart4m0 = serial.Serial(self.port_uart, 115200, timeout=1,
-                                                     stopbits=serial.STOPBITS_TWO,
+                                                     stopbits=1,
                                                      parity=serial.PARITY_ODD)
                     
                         self.state_init_uart = True
